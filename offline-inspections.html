@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>VisionLink Offline Inspections — Nick Montesano</title>
+<meta name="description" content="Letting operators and technicians finish equipment inspections where the signal ends.">
+<meta property="og:title" content="VisionLink Offline Inspections — Nick Montesano">
+<meta property="og:description" content="Letting operators and technicians finish equipment inspections where the signal ends.">
+<meta property="og:image" content="https://nickmontesano.com/og.jpg">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<script>try{var t=localStorage.getItem('theme');if(t)document.documentElement.dataset.theme=t;}catch(e){}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/site.css">
+<style>.ph{flex:none;width:228px;height:468px;border-radius:36px;background:#121212;padding:7px;box-sizing:border-box;box-shadow:0 22px 40px -22px rgba(0,0,0,.55)}
+.scr{width:100%;height:100%;border-radius:29px;overflow:hidden;background:#F6F5F1;color:#1B1B1B;display:flex;flex-direction:column;position:relative;font-family:'Albert Sans',system-ui,sans-serif;font-size:11px;line-height:1.35}
+.hd{background:#141414;color:#fff;padding:24px 14px 10px;display:flex;justify-content:space-between;align-items:center}
+.logo{font-weight:700;letter-spacing:.16em;font-size:12px}
+.av{width:22px;height:22px;border-radius:50%;background:#3A3A3A;color:#fff;font-size:9px;display:flex;align-items:center;justify-content:center}
+.off{display:flex;gap:5px;justify-content:center;align-items:center;padding:6px;background:#E6E3DC;font-size:10px;font-weight:600;color:#333}
+.bd{flex:1;padding:12px;display:flex;flex-direction:column;gap:8px;overflow:hidden}
+.card{background:#fff;border:1px solid #D6D2C8;border-radius:10px;padding:14px;display:flex;flex-direction:column;align-items:center;gap:6px;font-weight:600}
+.nav{background:#141414;color:#BDBDBD;display:flex;justify-content:space-around;padding:9px 6px 16px;font-size:9px}
+.nav .on{color:#fff;font-weight:700}
+.row{background:#fff;border:1px solid #E1DED6;border-radius:8px;padding:8px 10px;display:flex;justify-content:space-between;align-items:center;gap:6px}
+.row b{display:block;font-size:10.5px}
+.sub{color:#555;font-size:9.5px}
+.chip{flex:none;font-size:8.5px;font-weight:700;color:#1D5A32;background:#E1F1E5;border:1px solid #9CC9A8;border-radius:99px;padding:2px 6px}
+.chip.wait{color:#6B4700;background:#FBEFD2;border-color:#E2C27A}
+.seg{display:flex;background:#E6E3DC;border-radius:99px;padding:3px}
+.seg span{flex:1;text-align:center;padding:5px;border-radius:99px;font-weight:600}
+.seg .on{background:#141414;color:#fff}
+.lab{font-size:8.5px;font-weight:700;letter-spacing:.07em;color:#555;text-transform:uppercase;margin-top:2px}
+.srch{background:#fff;border:1px solid #D6D2C8;border-radius:99px;padding:6px 10px;color:#555}
+.info{background:#E7EEF7;border:1px solid #A9BED8;border-radius:8px;padding:8px;font-size:9.5px;color:#1F3550}
+.btnp{background:#F2B300;color:#141414;border-radius:8px;padding:9px;text-align:center;font-weight:700}
+.btns{border:1px solid #141414;border-radius:8px;padding:9px;text-align:center;font-weight:700;background:#fff}
+.empty{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:8px;padding:18px}
+.empty .ic{width:56px;height:56px;border-radius:50%;background:#E6E3DC;display:flex;align-items:center;justify-content:center}
+.del{color:#A1251C;font-weight:600;font-size:9.5px}
+.ttl{background:#fff;padding:24px 14px 10px;text-align:center;font-weight:700;font-size:12px}
+.tabs{display:flex;background:#fff;border-bottom:1px solid #E1DED6}
+.tabs span{flex:1;text-align:center;padding:8px 4px;font-weight:600;color:#555}
+.tabs .on{color:#141414;box-shadow:inset 0 -2px 0 #F2B300}
+.qa{display:grid;grid-template-columns:repeat(4,1fr);gap:5px}
+.qa span{background:#fff;border:1px solid #D6D2C8;border-radius:8px;padding:10px 2px;text-align:center;font-size:8.5px;font-weight:600}
+.dim{position:absolute;inset:0;background:rgba(10,10,10,.55);display:flex;align-items:center;justify-content:center;padding:14px}
+.dlg{background:#fff;border-radius:12px;padding:14px;display:flex;flex-direction:column;gap:8px;width:100%;box-sizing:border-box}
+.toast{background:#E1F1E5;border:1px solid #9CC9A8;color:#1D5A32;border-radius:8px;padding:7px 9px;font-size:9.5px;font-weight:600}
+</style>
+<script src="/site.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="wrap">
+<header class="top">
+<a class="lnk" href="/"><span class="arw">←</span> All work</a>
+<a href="/" class="brand">Nick Montesano</a>
+<button type="button" class="toggle" data-toggle aria-label="Switch to dark mode"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path class="i-moon" d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z"></path><path class="i-sun" d="M12 4V2 M12 22v-2 M4 12H2 M22 12h-2 M5.6 5.6 4.2 4.2 M19.8 19.8l-1.4-1.4 M5.6 18.4l-1.4 1.4 M19.8 4.2l-1.4 1.4 M12 8a4 4 0 1 0 0 8a4 4 0 1 0 0-8"></path></svg></button>
+</header>
+<main id="main">
+<section style="padding: clamp(40px, 7vw, 88px) 0 28px; display: flex; flex-direction: column; gap: 16px">
+<span class="mono" style="font-size: 12px; color: var(--accent)">01 · CATERPILLAR · VISIONLINK MOBILE · 2026</span>
+<h1 style="margin: 0; font-weight: 600; font-size: clamp(40px, 6vw, 80px); line-height: 0.98; letter-spacing: -0.045em">VisionLink Offline Inspections</h1>
+<p style="margin: 0; font-size: clamp(18px, 1.7vw, 21px); line-height: 1.5; color: var(--muted); max-width: 52ch">Letting operators and technicians finish equipment inspections where the signal ends.</p>
+<p class="mono" style="margin: 0; font-size: 11px; color: var(--muted)">SCREENS REDRAWN WITH PLACEHOLDER DATA FOR CONFIDENTIALITY.</p>
+</section>
+<section aria-labelledby="c-take" style="background: var(--takeBg); color: var(--takeInk); border-radius: 6px; padding: clamp(24px, 4vw, 40px); display: flex; flex-direction: column; gap: 22px">
+<h2 id="c-take" class="mono" style="margin: 0; font-size: 12px; font-weight: 500; color: var(--takeNum)">KEY TAKEAWAYS</h2>
+<ol style="margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); gap: 24px 40px">
+<li style="display: flex; flex-direction: column; gap: 8px"><span style="font-size: 36px; font-weight: 700; line-height: 1; color: var(--takeNum)">1</span><span style="font-size: 20px; line-height: 1.38; font-weight: 500">Offline is a mode the user can see and control, not an error.</span></li>
+<li style="display: flex; flex-direction: column; gap: 8px"><span style="font-size: 36px; font-weight: 700; line-height: 1; color: var(--takeNum)">2</span><span style="font-size: 20px; line-height: 1.38; font-weight: 500">Users prepare while online, so nothing is missing in the field.</span></li>
+<li style="display: flex; flex-direction: column; gap: 8px"><span style="font-size: 36px; font-weight: 700; line-height: 1; color: var(--takeNum)">3</span><span style="font-size: 20px; line-height: 1.38; font-weight: 500">"Done" and "synced" are two different states.</span></li>
+</ol>
+</section>
+<div class="case-grid">
+<aside aria-labelledby="c-glance" style="flex: 1 1 240px; max-width: 300px; display: flex; flex-direction: column; gap: 14px; font-size: 15px; line-height: 1.5">
+<h2 id="c-glance" class="mono" style="margin: 0; font-size: 12px; font-weight: 500; color: var(--muted)">AT A GLANCE</h2>
+<div style="padding-top: 12px; border-top: 1px solid var(--line)"><span class="mono" style="display: block; font-size: 11px; color: var(--muted)">COMPANY</span><strong style="font-weight: 600">Caterpillar</strong> · VisionLink</div>
+<div style="padding-top: 12px; border-top: 1px solid var(--line)"><span class="mono" style="display: block; font-size: 11px; color: var(--muted)">ROLE</span><strong style="font-weight: 600">Senior UX/UI Designer</strong>, lead on offline</div>
+<div style="padding-top: 12px; border-top: 1px solid var(--line)"><span class="mono" style="display: block; font-size: 11px; color: var(--muted)">TIMELINE</span>Feb 2026 → year-end release</div>
+<div style="padding-top: 12px; border-top: 1px solid var(--line)"><span class="mono" style="display: block; font-size: 11px; color: var(--muted)">TEAM</span><ul style="margin: 4px 0 0; padding-left: 18px; display: flex; flex-direction: column; gap: 2px"><li>Product owner</li><li>Mobile engineering lead</li><li>Engineers + QA</li><li>Nick Guy, designer and app expert</li></ul></div>
+<div style="padding-top: 12px; border-top: 1px solid var(--line)"><span class="mono" style="display: block; font-size: 11px; color: var(--muted)">PLATFORM</span><ul style="margin: 4px 0 0; padding-left: 18px; display: flex; flex-direction: column; gap: 2px"><li>iOS + Android (cross-platform)</li><li>Web app</li></ul></div>
+<div style="padding-top: 12px; border-top: 1px solid var(--line)"><span class="mono" style="display: block; font-size: 11px; color: var(--muted)">STATUS</span><strong style="font-weight: 600">In build</strong>, ships by year end</div>
+<div style="padding-top: 12px; border-top: 1px solid var(--line)"><span class="mono" style="display: block; font-size: 11px; color: var(--muted)">TOOLS</span><ul style="margin: 4px 0 0; padding-left: 18px; display: flex; flex-direction: column; gap: 4px"><li><strong style="font-weight: 600">Figma</strong>: flows, UI, specs</li><li><strong style="font-weight: 600">Figma Make</strong>: 5 offline banner directions</li><li><strong style="font-weight: 600">Dovetail AI</strong>: research synthesis</li></ul></div>
+</aside>
+<div class="prose v5">
+
+
+<article class="rise" style="display: flex; flex-direction: column; gap: 14px">
+<span class="mono" style="font-size: 12px; color: var(--accent)">1 · PROBLEM</span>
+<h2 style="margin: 0; font-weight: 600; font-size: clamp(24px, 2.6vw, 32px); letter-spacing: -0.03em; line-height: 1.12">Inspections happen where the signal doesn't</h2>
+<ul style="margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 10px; font-size: 17px; line-height: 1.6; max-width: 62ch"><li><strong style="font-weight: 600">Who:</strong> Operators doing daily walkarounds and technicians inspecting machines on remote job sites.</li><li><strong style="font-weight: 600">Pain:</strong> A dropped connection meant an unfinished inspection, or no way to know if photos had uploaded.</li><li><strong style="font-weight: 600">Ask:</strong> In research, users wanted inspection records kept on the device until they could sync.</li><li><strong style="font-weight: 600">Why now:</strong> The legacy inspection app was being retired, so this moved into VisionLink.</li></ul>
+</article>
+
+<article class="rise" style="display: flex; flex-direction: column; gap: 14px">
+<span class="mono" style="font-size: 12px; color: var(--accent)">2 · MY ROLE</span>
+<h2 style="margin: 0; font-weight: 600; font-size: clamp(24px, 2.6vw, 32px); letter-spacing: -0.03em; line-height: 1.12">Lead designer, from research to dev handoff</h2>
+<ul style="margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 10px; font-size: 17px; line-height: 1.6; max-width: 62ch"><li><strong style="font-weight: 600">Owned:</strong> Design from February 2026 through dev handoff. Nick Guy stayed on as the app expert.</li><li><strong style="font-weight: 600">Influenced:</strong> The acceptance criteria, through my sessions with the product owner and mobile engineering lead.</li><li><strong style="font-weight: 600">System:</strong> Added offline components to a mobile design system that was still young.</li></ul>
+</article>
+
+<article class="rise" style="display: flex; flex-direction: column; gap: 14px">
+<span class="mono" style="font-size: 12px; color: var(--accent)">3 · DECISION</span>
+<h2 style="margin: 0; font-weight: 600; font-size: clamp(24px, 2.6vw, 32px); letter-spacing: -0.03em; line-height: 1.12">Make offline a mode, not an error</h2>
+<ul style="margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 10px; font-size: 17px; line-height: 1.6; max-width: 62ch"><li><strong style="font-weight: 600">Research:</strong> Studied Spotify, Google Translate and Letterboxd, then explored 5 banner directions in Figma Make.</li><li><strong style="font-weight: 600">Chose:</strong> A quiet, persistent "No internet connection" bar.</li><li><strong style="font-weight: 600">Slow network:</strong> A prompt asks whether to stay online or go offline.</li><li><strong style="font-weight: 600">Reconnect:</strong> Manual, by pulling down to refresh. Agreed with engineering.</li><li><strong style="font-weight: 600">Look:</strong> Deliberately distinct from the company's other inspection app.</li></ul>
+<figure style="margin: 4px 0 0; display: flex; flex-direction: column; gap: 10px">
+<div role="img" aria-label="Two phone screens. Left: offline home with a No internet connection bar and only Report a problem and Start inspection. Right: a Slow network detected dialog with Stay online and Go offline." style="background: var(--surface); border-radius: 6px; padding: 32px 16px; display: flex; flex-wrap: wrap; gap: 28px; justify-content: center">
+<div class="ph"><div class="scr">
+<div class="hd"><span class="logo">VISIONLINK</span><span class="av">NM</span></div>
+<div class="off"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M2 2l20 20M8.5 16.5a5 5 0 0 1 7 0M5 12.6a10 10 0 0 1 4-2.4M19 12.6a10 10 0 0 0-2.5-1.7M12 20h.01"></path></svg>No internet connection</div>
+<div class="bd">
+<div class="card"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9"></circle><path d="M12 8v5M12 16h.01"></path></svg>Report a problem</div>
+<div class="card"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="6" y="4" width="12" height="17" rx="2"></rect><path d="M9 4h6v3H9zM9 12h6M9 16h4"></path></svg>Start inspection</div>
+<p class="sub" style="margin: 2px 0 0; text-align: center">Inspections sync when you're back online.</p>
+</div>
+<div class="nav"><span class="on">Home</span><span>Inspections</span></div>
+</div></div>
+<div class="ph"><div class="scr">
+<div class="hd"><span class="logo">VISIONLINK</span><span class="av">NM</span></div>
+<div class="bd">
+<div class="srch">Search</div>
+<div class="qa"><span>Scan</span><span>Inspect</span><span>Report</span><span>More</span></div>
+<span class="lab">Needs review</span>
+<div class="row"><span><b>Health events</b><span class="sub">12 high · 6 medium</span></span></div>
+<div class="row"><span><b>Planned maintenance</b><span class="sub">20 high · 30 medium</span></span></div>
+</div>
+<div class="nav"><span class="on">Home</span><span>Assets</span><span>Review</span><span>Tasks</span><span>More</span></div>
+<div class="dim"><div class="dlg">
+<b style="font-size: 12px">Slow network detected</b>
+<span class="sub" style="font-size: 10px">Go offline for a more reliable experience. Some features will be limited.</span>
+<div style="display: flex; gap: 6px"><span class="btns" style="flex: 1">Stay online</span><span class="btnp" style="flex: 1">Go offline</span></div>
+</div></div>
+</div></div>
+</div>
+<figcaption style="font-size: 14px; color: var(--muted)">Offline home, and the prompt when the connection is slow but not gone.</figcaption>
+</figure>
+</article>
+
+<article class="rise" style="display: flex; flex-direction: column; gap: 14px">
+<span class="mono" style="font-size: 12px; color: var(--accent)">4 · DECISION</span>
+<h2 style="margin: 0; font-weight: 600; font-size: clamp(24px, 2.6vw, 32px); letter-spacing: -0.03em; line-height: 1.12">Remove actions, don't disable them</h2>
+<ul style="margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 10px; font-size: 17px; line-height: 1.6; max-width: 62ch"><li><strong style="font-weight: 600">Explored:</strong> Greying out the actions that don't work offline.</li><li><strong style="font-weight: 600">Chose:</strong> Cutting them. The offline home has only the two actions that work.</li><li><strong style="font-weight: 600">Why:</strong> Greyed-out buttons promise what the app can't deliver, and engineering confirmed they'd still hit the server.</li><li><strong style="font-weight: 600">Trade-off:</strong> Users don't see what's missing, so empty states explain what to do once back online.</li></ul>
+</article>
+
+<article class="rise" style="display: flex; flex-direction: column; gap: 14px">
+<span class="mono" style="font-size: 12px; color: var(--accent)">5 · DECISION</span>
+<h2 style="margin: 0; font-weight: 600; font-size: clamp(24px, 2.6vw, 32px); letter-spacing: -0.03em; line-height: 1.12">Prepare online, work offline</h2>
+<ul style="margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 10px; font-size: 17px; line-height: 1.6; max-width: 62ch"><li><strong style="font-weight: 600">Forms:</strong> Downloaded one at a time from each form's details page.</li><li><strong style="font-weight: 600">Compromise:</strong> I proposed separate manual and auto sections; Product wanted one list. We shipped one list with a "Downloaded" chip and an All/Downloaded toggle.</li><li><strong style="font-weight: 600">Assets:</strong> I designed both auto and manual sync and pushed for manual. The engineering proof of concept backed it, since auto sync meant very large requests for big fleets.</li><li><strong style="font-weight: 600">Size:</strong> Images are left out offline to keep downloads small.</li></ul>
+<figure style="margin: 4px 0 0; display: flex; flex-direction: column; gap: 10px">
+<div role="img" aria-label="Two phone screens. Left: Forms list with All forms and Downloaded toggle, Downloaded chips, and a prompt to download assets. Right: Form details with a success toast, Remove download and Start inspection buttons." style="background: var(--surface); border-radius: 6px; padding: 32px 16px; display: flex; flex-wrap: wrap; gap: 28px; justify-content: center">
+<div class="ph"><div class="scr">
+<div class="hd"><span class="logo">VISIONLINK</span><span class="av">NM</span></div>
+<div class="tabs"><span>Completed</span><span>In progress</span><span class="on">Forms</span></div>
+<div class="bd">
+<div class="seg"><span class="on">All forms</span><span>Downloaded</span></div>
+<div class="srch">Search by form name</div>
+<div class="info">Your assets aren't available offline. <b style="text-decoration: underline">Download</b></div>
+<div class="row"><span><b>Daily walkaround</b><span class="sub">4 sections · 22 questions</span></span><span class="chip">Downloaded</span></div>
+<div class="row"><span><b>Safety inspection</b><span class="sub">3 sections · 18 questions</span></span><span class="chip">Downloaded</span></div>
+<div class="row"><span><b>PM checklist</b><span class="sub">6 sections · 40 questions</span></span></div>
+</div>
+<div class="nav"><span>Home</span><span>Assets</span><span>Review</span><span>Tasks</span><span class="on">More</span></div>
+</div></div>
+<div class="ph"><div class="scr">
+<div class="ttl">Form details</div>
+<div class="bd">
+<div class="toast">Form downloaded for offline use</div>
+<b style="font-size: 13px; margin-top: 4px">Daily walkaround</b>
+<span class="sub">Asset form · 4 sections · 22 questions</span>
+<span class="sub">Last updated 03/12/2026</span>
+<div style="flex: 1"></div>
+<span class="btns">Remove download</span>
+<span class="btnp">Start inspection</span>
+</div>
+</div></div>
+</div>
+<figcaption style="font-size: 14px; color: var(--muted)">One list, with download status on each row. Downloading happens on the form itself.</figcaption>
+</figure>
+</article>
+
+<article class="rise" style="display: flex; flex-direction: column; gap: 14px">
+<span class="mono" style="font-size: 12px; color: var(--accent)">6 · DECISION</span>
+<h2 style="margin: 0; font-weight: 600; font-size: clamp(24px, 2.6vw, 32px); letter-spacing: -0.03em; line-height: 1.12">Separate "done" from "sent"</h2>
+<ul style="margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 10px; font-size: 17px; line-height: 1.6; max-width: 62ch"><li><strong style="font-weight: 600">Ask:</strong> Product wanted users to know when they were finished and only waiting to sync.</li><li><strong style="font-weight: 600">Continue:</strong> In-progress inspections show how many required questions are answered.</li><li><strong style="font-weight: 600">Waiting for connection:</strong> Submitted inspections, held until signal returns.</li><li><strong style="font-weight: 600">Safety net:</strong> Everything stays editable until it syncs.</li></ul>
+<figure style="margin: 4px 0 0; display: flex; flex-direction: column; gap: 10px">
+<div role="img" aria-label="Phone screen of the In progress tab while offline, grouped into Continue and Waiting for connection." style="background: var(--surface); border-radius: 6px; padding: 32px 16px; display: flex; flex-wrap: wrap; gap: 28px; justify-content: center">
+<div class="ph"><div class="scr">
+<div class="hd"><span class="logo">VISIONLINK</span><span class="av">NM</span></div>
+<div class="off"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M2 2l20 20M8.5 16.5a5 5 0 0 1 7 0M5 12.6a10 10 0 0 1 4-2.4M19 12.6a10 10 0 0 0-2.5-1.7M12 20h.01"></path></svg>No internet connection</div>
+<div class="tabs"><span>Forms</span><span class="on">In progress</span></div>
+<div class="bd">
+<div class="info">Inspections stay editable. Completed ones sync when you reconnect.</div>
+<span class="lab">Continue</span>
+<div class="row"><span><b>Safety inspection</b><span class="sub">1 of 4 required answered</span></span><span class="del">Delete</span></div>
+<div class="row"><span><b>Daily walkaround</b><span class="sub">4 of 4 required answered</span></span><span class="del">Delete</span></div>
+<span class="lab">Waiting for connection</span>
+<div class="row"><span><b>Shop inspection</b><span class="sub">Submitted · syncs automatically</span></span><span class="chip wait">Pending</span></div>
+</div>
+<div class="nav"><span>Home</span><span class="on">Inspections</span></div>
+</div></div>
+</div>
+<figcaption style="font-size: 14px; color: var(--muted)">Two kinds of unfinished work, labeled so they can't be confused.</figcaption>
+</figure>
+</article>
+
+<article class="rise" style="display: flex; flex-direction: column; gap: 14px">
+<span class="mono" style="font-size: 12px; color: var(--accent)">7 · EDGE STATES</span>
+<h2 style="margin: 0; font-weight: 600; font-size: clamp(24px, 2.6vw, 32px); letter-spacing: -0.03em; line-height: 1.12">Every dead end points somewhere</h2>
+<p style="margin: 0; font-size: 17px; line-height: 1.65; max-width: 62ch">If a user goes offline without preparing, each empty state says what's missing and where to get it.</p>
+<figure style="margin: 4px 0 0; display: flex; flex-direction: column; gap: 10px">
+<div role="img" aria-label="Three empty states: no offline assets, no forms downloaded, no forms created." style="background: var(--surface); border-radius: 6px; padding: 32px 12px; display: flex; flex-wrap: wrap; gap: 20px; justify-content: center">
+<div class="ph"><div class="scr">
+<div class="ttl">Start inspection</div>
+<div class="off">No internet connection</div>
+<div class="tabs"><span class="on">Assets</span><span>Site forms</span></div>
+<div class="empty"><span class="ic"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="6"></circle><path d="M20 20l-4.5-4.5"></path></svg></span><b style="font-size: 12px">No offline assets</b><span class="sub">When you're back online, download assets from the Forms page.</span></div>
+</div></div>
+<div class="ph"><div class="scr">
+<div class="ttl">Select inspection form</div>
+<div class="off">No internet connection</div>
+<div class="empty"><span class="ic"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="6" y="4" width="12" height="17" rx="2"></rect><path d="M9 4h6v3H9zM9.5 11.5l5 5M14.5 11.5l-5 5"></path></svg></span><b style="font-size: 12px">No forms downloaded</b><span class="sub">Assets and forms download separately. Download forms from the Forms page when you're online.</span></div>
+</div></div>
+<div class="ph"><div class="scr">
+<div class="hd"><span class="logo">VISIONLINK</span><span class="av">NM</span></div>
+<div class="tabs"><span>Completed</span><span>In progress</span><span class="on">Forms</span></div>
+<div class="empty"><span class="ic"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="6" y="4" width="12" height="17" rx="2"></rect><path d="M9 4h6v3H9zM12 10v6M9 13h6"></path></svg></span><b style="font-size: 12px">No forms available</b><span class="sub">Create forms in VisionLink on the web.</span></div>
+<div class="nav"><span>Home</span><span>Assets</span><span>Review</span><span>Tasks</span><span class="on">More</span></div>
+</div></div>
+</div>
+<figcaption style="font-size: 14px; color: var(--muted)">No assets, no forms downloaded, no forms created.</figcaption>
+</figure>
+</article>
+
+
+</div>
+</div>
+<section class="rise block" aria-labelledby="c-out">
+<h2 id="c-out" style="margin: 0; font-weight: 600; font-size: 32px; letter-spacing: -0.03em">Where it stands</h2>
+<ul style="margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 10px; font-size: 17px; line-height: 1.6; max-width: 62ch"><li><strong style="font-weight: 600">Built:</strong> Offline mode and inspections. Form management ships by year end.</li><li><strong style="font-weight: 600">Validated:</strong> Engineering proof of concept and QA.</li><li><strong style="font-weight: 600">Next:</strong> Field testing is on the research roadmap.</li></ul>
+<div class="tbl"><table><thead><tr class="mono"><th scope="col">Signal</th><th scope="col">What it means</th><th scope="col">Status</th></tr></thead><tbody><tr><td class="ov">~10 s</td><td>average response time in the proof of concept; it set the slow-network threshold</td><td class="mono oc">MEASURED · POC</td></tr><tr><td class="ov">30 s</td><td>timeout before the app switches to offline</td><td class="mono oc">BUILT</td></tr><tr><td class="ov">—</td><td>offline inspections that sync without errors</td><td class="mono oc">TO MEASURE</td></tr><tr><td class="ov">—</td><td>support tickets about lost inspections</td><td class="mono oc">TO MEASURE</td></tr></tbody></table></div>
+</section>
+<section class="rise block thin" aria-labelledby="c-learn"><h2 id="c-learn" class="sec-t">What I'd do differently</h2><div class="lrn"><p class="lrn-t">Test in the field before build.</p><p class="lrn-d">The design rests on heuristics, competitor patterns and an engineering proof of concept. Field sessions would have tested the slow-network prompt with real operators.</p></div><div class="lrn"><p class="lrn-t">Push AI tools harder, sooner.</p><p class="lrn-d">Figma Make was new to us and agents were just rolling out. I would prototype the connectivity logic as something people could actually use, not static frames.</p></div></section>
+</main>
+<a class="lnk next" href="/opportunity-detection"><span><span class="mono eyebrow">NEXT · 02</span><span class="next-t">Opportunity Detection</span></span><span class="arw" aria-hidden="true">→</span></a>
+<footer class="foot">
+<a href="mailto:njmontesano@gmail.com" class="mail">njmontesano@gmail.com</a>
+<span class="mono small">© 2026 · ARVADA, COLORADO</span>
+</footer>
+</div>
+</body>
+</html>

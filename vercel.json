@@ -1,0 +1,10 @@
+{
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "redirects": [
+    { "source": "/work", "destination": "/", "permanent": true },
+    { "source": "/contact", "destination": "/about", "permanent": true },
+    { "source": "/disclosureapproval", "destination": "/disclosure-approval", "permanent": true },
+    { "source": "/speakup", "destination": "/speak-up", "permanent": true }
+  ]
+}
