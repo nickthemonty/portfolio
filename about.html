@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>About · Nick Montesano</title>
+<meta name="description" content="Senior Product Designer · enterprise UX, design systems, user research and AI-assisted prototyping">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,400&family=DM+Mono:wght@400;500&family=Fraunces:ital,opsz,wght@0,9..144,400..600;1,9..144,400..600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css"><link rel="stylesheet" href="v12.css">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<style>.page-about .collage .c2{z-index:5!important}.pick-text.bullets{display:block}.pick-text.bullets .b{display:block;position:relative;padding-left:16px;margin:6px 0 0}.pick-text.bullets .b::before{content:"";position:absolute;left:2px;top:.62em;width:5px;height:5px;border-radius:50%;background:var(--accent)}</style>
+<meta property="og:title" content="About · Nick Montesano">
+<meta property="og:description" content="Senior Product Designer · enterprise UX, design systems, user research and AI-assisted prototyping">
+<meta property="og:image" content="https://nickmontesano.com/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<script defer src="/_vercel/insights/script.js"></script>
+</head>
+<body class="page-about">
+<a class="skip" href="#main">Skip to content</a>
+<div class="top">
+<header class="wrap site-head">
+  <a class="name" href="index.html"><svg class="mark" viewBox="-4 -36 268 98" aria-hidden="true"><path class="r" d="M2 56 Q24 43 42 35 Q48 31 54 35 Q65 45 75 50 Q80 52 86 47 Q105 27 122 11 Q128 6 134 11 Q149 27 161 38 Q166 42 172 38 Q185 28 196 22 Q201 19 207 23 Q232 41 258 55"/><path class="s" d="M128 -32 L128 -13 M105 -24 L115 -10 M151 -24 L141 -10 M96 -3 L106 -6"/></svg>Nick Montesano</a>
+  <nav aria-label="Primary"><a href="index.html">Work</a><a href="about.html" aria-current="page">About</a><a href="contact.html">Contact</a></nav>
+</header>
+<section class="wrap about-hero">
+  <h1 style="max-width:none">Hi, I&#8217;m <span style="font-style:italic;font-weight:400;color:var(--accent)">Nick</span>.<span style="display:block"><span style="white-space:nowrap">From Upstate New York,</span> <span style="white-space:nowrap">now in <span style="font-style:italic;font-weight:400;color:var(--accent)">Colorado</span>.</span></span></h1>
+  <p>Outside of design, you can catch me staying active trail running or hiking. Indoors, I&#8217;m into movies, vinyl, video games, graphic novels, sci-fi and fantasy.</p>
+</section>
+</div>
+<main id="main" class="wrap">
+  <div class="collage" aria-label="Photos">
+    <img class="c2" src="img/me-01.webp" alt="Nick trail running">
+    <img class="c1" src="img/me-02.webp" alt="Nick mapping a workflow on a whiteboard with a teammate">
+    <img class="c3" src="img/me-hike.webp" alt="Nick and two friends at a rocky summit overlooking the Front Range">
+    <img class="c4" src="img/me-kayak.webp" alt="Nick in a yellow kayak on a lake">
+  </div>
+  <div class="rule-top rule-flush">
+    <span class="mono">What inspires me</span>
+    <h2 style="margin-bottom:24px">Some favorites from this year</h2>
+    <div class="picks" id="picks"></div>
+  </div>
+  <div class="rule-top rule-flush" style="display:none" aria-hidden="true"><!-- Hidden for now. Remove display:none to bring back. -->
+    <span class="mono">Currently</span>
+    <h2 style="margin-bottom:24px">What I&#8217;m reading, where I&#8217;ve hiked and raced</h2>
+    <div class="picks static" id="now"></div>
+  </div>
+</main>
+<script src="now.js"></script>
+<script>
+(function () {
+  function el(t, c, x) { var e = document.createElement(t); if (c) e.className = c; if (x != null) e.textContent = x; return e; }
+  var d = window.NOW || {};
+  function build(wrap, list, label, interactive) {
+    list.forEach(function (p, n) {
+      var b = interactive ? el("button", "pick p" + (n + 1)) : el(p.href ? "a" : "div", "pick p" + (n + 1));
+      if (!interactive && p.href) { b.href = p.href; b.target = "_blank"; b.rel = "noopener"; b.style.textDecoration = "none"; b.style.color = "inherit"; }
+      if (interactive) { b.type = "button"; b.setAttribute("aria-expanded", "false"); }
+      b.style.setProperty("--tint", p.tint || "#DDD5C4");
+      var art = el("span", "pick-art"); art.setAttribute("aria-hidden", "true");
+      if (p.route) art.innerHTML = '<svg class="route" viewBox="0 0 100 100" fill="none"><path d="' + p.route.replace(/[^MCSLQZz0-9 ,.\-]/g, "") + '" stroke="#1F4E4A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+      if (p.img) { var im = el("img", "pick-img"); im.src = p.img; im.alt = ""; im.loading = "lazy"; if (p.pos) im.style.objectPosition = p.pos; art.appendChild(im); art.classList.add("has-img"); }
+      art.appendChild(el("span", "mono", p.kind));
+      if (p.sample) art.appendChild(el("span", "sample", "Sample"));
+      b.appendChild(art);
+      var body = el("span", "pick-body");
+      body.appendChild(el("span", "pick-title", p.title));
+      body.appendChild(el("span", "pick-meta", p.meta));
+      var more = el("span", "pick-more");
+      more.appendChild(el("span", "mono", label));
+      if (Array.isArray(p.why)) { var pt = el("span", "pick-text bullets"); p.why.forEach(function (w) { pt.appendChild(el("span", "b", w)); }); more.appendChild(pt); }
+      else more.appendChild(el("span", "pick-text", p.why));
+      if (interactive) { body.appendChild(more); body.appendChild(el("span", "pick-cta", "More →")); }
+      b.appendChild(body);
+      if (interactive) b.addEventListener("click", function () {
+        var open = b.getAttribute("aria-expanded") === "true";
+        wrap.querySelectorAll(".pick").forEach(function (x) { x.setAttribute("aria-expanded", "false"); });
+        b.setAttribute("aria-expanded", open ? "false" : "true");
+        wrap.classList.toggle("has-open", !open);
+      });
+      wrap.appendChild(b);
+    });
+  }
+  build(document.getElementById("picks"), d.picks || [], "More", true);
+  document.addEventListener("click", function (e) {
+    var w = document.getElementById("picks");
+    if (!w || e.target.closest("#picks .pick")) return;
+    w.querySelectorAll(".pick").forEach(function (x) { x.setAttribute("aria-expanded", "false"); });
+    w.classList.remove("has-open");
+  });
+  document.addEventListener("keydown", function (e) {
+    if (e.key !== "Escape") return;
+    var w = document.getElementById("picks");
+    w.querySelectorAll(".pick").forEach(function (x) { x.setAttribute("aria-expanded", "false"); });
+    w.classList.remove("has-open");
+  });
+  build(document.getElementById("now"), d.current || [], "", false);
+})();
+</script>
+<footer class="wrap site-foot rule-top">
+  <div class="connect">
+    <h2>Let&#8217;s connect</h2>
+    <p class="avail"><span class="dot" aria-hidden="true"></span>Open to full-time senior product design roles · Remote or hybrid</p>
+    <div class="connect-links">
+      <a class="mail-btn" href="mailto:njmontesano@gmail.com"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>Email me</a>
+      <a class="li" href="https://www.linkedin.com/in/nick-montesano" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.063 2.063 0 1 1 0-4.126 2.063 2.063 0 0 1 0 4.126zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+      <a class="dl" data-pdf download hidden>Download résumé <span aria-hidden="true">↓</span></a>
+    </div>
+  </div>
+</footer>
+<script src="projects.js"></script>
+</body>
+</html>
